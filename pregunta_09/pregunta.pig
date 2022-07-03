@@ -31,4 +31,7 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
+DATOS = LOAD './data.csv' using PigStorage(',') AS (id:int,  name:chararray, lastname:chararray,   date:chararray,  color:chararray, other:int);
+DATOS_1 = FOREACH DATOS GENERATE CONCAT(name, '@', lastname);
 
+STORE DATOS_1 INTO 'output/' using PigStorage(',');

@@ -13,10 +13,8 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
-datos = LOAD './data.tsv' AS (letter:chararray, date:chararray, amount:int);
+A = LOAD './data.tsv' AS (letter:chararray, date:chararray, amount:int);
+B = GROUP A BY letter;
+C = FOREACH B GENERATE group, COUNT(A);
 
-Letras = GROUP datos BY letter
-
-Wordcount = FOREACH Letras GENERATE group, COUNT(datos);
-
-STORE Wordcount into 'output/' using PigStorage(',');
+STORE C INTO 'output/' using PigStorage(',');

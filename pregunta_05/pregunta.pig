@@ -12,12 +12,7 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
-DATOS = LOAD 'data.tsv' USING PigStorage('\t')  
-        AS (    
-                row:chararray,
-                col2:bag{dict:TUPLE(letter:chararray)},
-                col3:MAP[]
-        );
+DATOS = LOAD 'data.tsv' USING PigStorage('\t')  AS (row:chararray, col2:bag{dict:TUPLE(letter:chararray)}, col3:MAP[]);
 
 DATOS_1 = FOREACH DATOS GENERATE col2; 
 DATOS_2 = FOREACH DATOS_1 GENERATE FLATTEN(col2) AS word; 

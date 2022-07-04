@@ -24,4 +24,4 @@ DATOS = LOAD './data.csv' using PigStorage(',') AS (num:int, name:chararray, sec
 DATOS_1 = FOREACH DATOS GENERATE name, color;
 DATOS_2 = FILTER DATOS_1 BY NOT (color  MATCHES '.*b.*');
 DUMP DATOS_1;
-STORE DATOS_1 INTO 'output/' using PigStorage(',');
+STORE DATOS_2 INTO 'output/' using PigStorage(',');

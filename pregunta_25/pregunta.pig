@@ -20,3 +20,6 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+DATOS    = LOAD 'data.csv' USING PigStorage(',') AS (id:int, name:chararray, second_name:chararray, date:datetime, color:chararray, cant:int);
+DATOS_1 = FOREACH DATOS GENERATE INDEXOF(name,'a');
+STORE DATOS_1 INTO 'output' USING PigStorage(',');
